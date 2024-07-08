@@ -1,8 +1,13 @@
 package com.cos.blog.test;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +23,24 @@ public class DummyControllerTest {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	// 스프링부트 강좌 27강(블로그 프로젝트) - 전체 select 및 paging 테스트
+	@GetMapping("/dummy/users")
+	public List<User> list() {
+		return userRepository.findAll();
+	}
+	
+	// 스프링부트 강좌 27강(블로그 프로젝트) - 전체 select 및 paging 테스트
+	// 한 페이지당 2건의 데이터를 리턴받아 볼 예정
+	@GetMapping("/dummy/user")
+	public List<User> pageList(@PageableDefault(size = 2, sort ="id", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<User> pagingUser = userRepository.findAll(pageable);
+		
+		List<User> users = pagingUser.getContent();
+		return users;
+	}
 
-	// http://localhost:8000/blog/dummy/user/5
+	// http://localhost:8080/blog/dummy/user/5
 	@GetMapping("/dummy/user/{id}")
 	public User detail(@PathVariable int id) {
 		
