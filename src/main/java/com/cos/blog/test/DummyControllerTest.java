@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,13 +29,25 @@ public class DummyControllerTest {
 	@Autowired
 	private UserRepository userRepository;
 
+	@DeleteMapping("/dummy/user/{id}")
+	public String delete(@PathVariable int id) {
+
+		try {
+			userRepository.deleteById(id);
+		} catch (Exception e) {
+			return "삭제에 실패하였습니다. 해당 id는 DB에 없습니다.";
+		}
+
+		return "削除完了// id :::" + id;
+	}
+
 	// email, password
 	// 스프링부트 강좌 28강(블로그 프로젝트) - update 테스트
 	// 업데이트 할때는 ssal을 쓰지 않음
-	// save함수는 id를 전달하지 않으면 insert를 해주고
-	// save함수는 id를 전달하면 해당 id에 대한 데이터가 있으면 update를 해주고
-	// save함수는 id를 전달하면 해당 id에 대한 데이터가 없으면 insert를 해요.
-	@Transactional
+	// save関数はidを渡さないと挿入（insert）を行い
+	// save関数はidを渡すと、そのidに対応するデータがあれば更新（update）を行い
+	// save関数はidを渡すと、そのidに対応するデータがなければ挿入（insert）を行います。
+	@Transactional // ㅎ
 	@PutMapping("/dummy/user/{id}")
 	public User updateUser(@PathVariable int id, @RequestBody User requestUser) {
 		System.out.println("id : " + id);
@@ -42,13 +55,15 @@ public class DummyControllerTest {
 		System.out.println("email : " + requestUser.getEmail());
 
 		User user = userRepository.findById(id).orElseThrow(() -> {
-			return new IllegalArgumentException("修正に失敗しました。");
+			return new IllegalArgumentException("修正(update)に失敗しました。");
 		});
 		user.setPassword(requestUser.getPassword());
 		user.setEmail(requestUser.getEmail());
 
 		// userRepository.save(user);
-		return null;
+
+		// 더티 체킹
+		return user;
 	}
 
 	// 스프링부트 강좌 27강(블로그 프로젝트) - 전체 select 및 paging 테스트
