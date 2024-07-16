@@ -19,11 +19,8 @@ public class UserApiController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private HttpSession session;
-
 	@PostMapping("/api/user")
-	public ResponseDto<Integer> save(@RequestBody User user) {
+	public ResponseDto<Integer> save(@RequestBody User user, HttpSession session) {
 		System.out.println("UserApiControllerの/api/user");
 		user.setRole(RoleType.USER);
 		//		int result = userService.会員登録(user);
@@ -31,16 +28,16 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 
-	@PostMapping("/api/user/login")
-	public ResponseDto<Integer> login(@RequestBody User user) {
-		System.out.println("/api/user/loginが呼び出し");
-		User principal = userService.ログイン(user);
-		
-		if(principal != null) {
-			session.setAttribute("principal", principal);
-		}
-		
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
-	}
+//	@PostMapping("/api/user/login")
+//	public ResponseDto<Integer> login(@RequestBody User user) {
+//		System.out.println("/api/user/loginが呼び出し");
+//		User principal = userService.ログイン(user);
+//		
+//		if(principal != null) {
+//			session.setAttribute("principal", principal);
+//		}
+//		
+//		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+//	}
 
 }
