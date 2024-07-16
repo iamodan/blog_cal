@@ -5,21 +5,26 @@
 <div class="container">
 	<form action="/" method="post">
 		<div class="form-group">
-			<label for="username">Username</label> 
-			<input type="text" name="username" class="form-control" placeholder="Enter username" id="username">
+			<label for="username">Username</label> <input type="text" name="username" class="form-control" placeholder="Enter username" id="username">
 		</div>
-				
+
 		<div class="form-group">
-			<label for="password">Password</label> 
-			<input type="password" name="password" class="form-control" placeholder="Enter password" id="password">
+			<label for="password">Password</label> <input type="password" name="password" class="form-control" placeholder="Enter password" id="password">
 		</div>
-		
-		<button id="btn-login" class="btn btn-primary">Login</button>
-<!-- 		<a href="https://kauth.kakao.com/oauth/authorize?client_id=b344701c3ff69917f13cd47bb45df871&redirect_uri=http://localhost:8000/auth/kakao/callback&response_type=code"><img height="38px" src="/image/kakao_login_button.png" /></a> -->
+
+		<div class="form-group form-check">
+			<label class="form-check-label"> <input class="form-check-input" type="checkbox"> Remember me
+			</label>
+		</div>
+
+		<!-- 		<a href="https://kauth.kakao.com/oauth/authorize?client_id=b344701c3ff69917f13cd47bb45df871&redirect_uri=http://localhost:8000/auth/kakao/callback&response_type=code"><img height="38px" src="/image/kakao_login_button.png" /></a> -->
 	</form>
-	
+
+	<button id="btn-login" class="btn btn-primary">Login</button>
+
 </div>
 
+<script src="/js/user.js"></script>
 <%@ include file="../layout/footer.jsp"%>
 
 
