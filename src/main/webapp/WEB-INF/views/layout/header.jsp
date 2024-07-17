@@ -28,8 +28,8 @@
 			<c:choose>
 				<c:when test="${empty principal}">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="/loginForm">ログイン</a></li>
-						<li class="nav-item"><a class="nav-link" href="/joinForm">会員登録</a></li>
+						<li class="nav-item"><a class="nav-link" href="/auth/loginForm">ログイン</a></li>
+						<li class="nav-item"><a class="nav-link" href="/auth/joinForm">会員登録</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
