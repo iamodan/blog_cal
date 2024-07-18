@@ -17,8 +17,7 @@ public class UserController {
 
 	@GetMapping("/auth/loginForm")
 	public String loginForm() {
-		System.out.println("check point ::: /auth/loginForm");
+		System.out.println("check point(GetMapping) ::: /auth/loginForm");
 		return "user/loginForm";
 	}
-
 }
