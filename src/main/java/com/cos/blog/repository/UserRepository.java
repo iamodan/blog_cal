@@ -1,5 +1,7 @@
 package com.cos.blog.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +11,10 @@ import com.cos.blog.model.User;
 // 자동으로 빈등록
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-
+	
+	// SELECT * FROM user WHERE username = 1?;
+	Optional<User> findByUsername(String username);
+	
 	// 로그인을 위한 어떤 함수
 	// SELECT * FROM user name = ?1 AND password = ?2;
 	//	User findByUsernameAndPassword(String username, String password);
