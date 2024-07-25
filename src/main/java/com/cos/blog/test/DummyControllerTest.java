@@ -75,12 +75,12 @@ public class DummyControllerTest {
 	// 스프링부트 강좌 27강(블로그 프로젝트) - 전체 select 및 paging 테스트
 	// 한 페이지당 2건의 데이터를 리턴받아 볼 예정
 	@GetMapping("/dummy/user")
-	public List<User> pageList(
+	public Page<User> pageList(
 			@PageableDefault(size = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 		Page<User> pagingUser = userRepository.findAll(pageable);
 
 		List<User> users = pagingUser.getContent();
-		return users;
+		return pagingUser;
 	}
 
 	// http://localhost:8080/blog/dummy/user/5

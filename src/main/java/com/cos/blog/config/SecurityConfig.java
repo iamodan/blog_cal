@@ -52,7 +52,7 @@ public class SecurityConfig {
 セキュリティ6.0バージョンからは、FORWARDリクエストに対して例外を設定する必要があります。
 そうしないと、デフォルトで認証が必要となります。
  */
-                .requestMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**").permitAll() 
+                .requestMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**","/dummy/**").permitAll() 
                 .anyRequest().authenticated()
             )
             .formLogin(formLogin -> formLogin
