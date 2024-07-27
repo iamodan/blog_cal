@@ -16,21 +16,27 @@ public class BoardService {
 	@Autowired
 	private BoardRepository boardRepository;
 
-	@Transactional
 	public void 書き込み(Board board, User user) { // title content
 		board.setCount(0);
 		board.setUser(user);
 		boardRepository.save(board);
 	}
 
+	@Transactional(readOnly = true)
 	public Page<Board> 書き込み一覧(Pageable pageable) {
 		return boardRepository.findAll(pageable);
 	}
 
+	@Transactional(readOnly = true)
 	public Board 書き込み詳細(int id) {
 		return boardRepository.findById(id).orElseThrow(() -> {
 			throw new IllegalArgumentException("書き込み詳細 失敗");
 		});
+	}
+
+	@Transactional
+	public void 書き込み削除(int id) {
+		boardRepository.deleteById(id);
 	}
 
 }
