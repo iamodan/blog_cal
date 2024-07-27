@@ -1,7 +1,5 @@
 package com.cos.blog.service;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +12,7 @@ import com.cos.blog.repository.BoardRepository;
 
 @Service
 public class BoardService {
- 
+
 	@Autowired
 	private BoardRepository boardRepository;
 
@@ -27,6 +25,12 @@ public class BoardService {
 
 	public Page<Board> 書き込み一覧(Pageable pageable) {
 		return boardRepository.findAll(pageable);
+	}
+
+	public Board 書き込み詳細(int id) {
+		return boardRepository.findById(id).orElseThrow(() -> {
+			throw new IllegalArgumentException("書き込み詳細 失敗");
+		});
 	}
 
 }

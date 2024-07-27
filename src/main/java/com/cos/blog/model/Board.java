@@ -37,6 +37,7 @@ public class Board {
 	private String title;
 
 	@Lob // 대용량 데이터
+	@Column(columnDefinition="TEXT") // 추가 2024.07.27
 	private String content; // 섬머노트 라이브러리 <html>태그가 섞여서 디자인이 됨.
 
 	private int count; // 조회수
