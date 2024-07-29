@@ -7,15 +7,16 @@
 <div class="container">
 
 	<button class="btn btn-secondary" onclick="history.back()">戻る</button>
-	<button id="btn-update" class="btn btn-warning">修正</button>
+
 	<c:if test="${board.user.id == principal.user.id}">
-	<button id="btn-delete" class="btn btn-danger">削除</button>
+		<!-- 		<button id="btn-update" class="btn btn-warning">修正</button> -->
+		<a href="/board/${board.id}/updateForm" class="btn btn-warning">修正</a>
+		<button id="btn-delete" class="btn btn-danger">削除</button>
 	</c:if>
-	<br/><br/>
+	<br /> <br />
 	<div>
-		投稿番号：<span id="id"><i>${board.id}</i></span>&nbsp;&nbsp;/&nbsp;
-		投稿者：<span id="id"><i>${board.user.username} </i></span>
-		<br/>
+		投稿番号：<span id="id"><i>${board.id}</i></span>&nbsp;&nbsp;/&nbsp; 投稿者：<span
+			id="id"><i>${board.user.username} </i></span> <br />
 	</div>
 	<div class="form-group">
 		<h3>${board.title}</h3>

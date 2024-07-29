@@ -39,4 +39,16 @@ public class BoardService {
 		boardRepository.deleteById(id);
 	}
 
+	@Transactional
+	public void 書き込み修正(int id, Board requestBoard) {
+		Board board = boardRepository.findById(id).orElseThrow(() -> {
+			throw new IllegalArgumentException("書き込み修正 失敗");
+		}); // 영속화 완료 
+		board.setTitle(requestBoard.getTitle());
+		board.setContent(requestBoard.getContent());
+		// 해당 함수로 종료시(Service가 종료될 때) 트랜잭션이 종료됩니다. 이때 더티체킹이 일어남
+	   // 자동 업데이트 db flush = commit
+
+	}
+
 }
