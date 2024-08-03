@@ -3,6 +3,8 @@ package com.cos.blog.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.blog.config.auth.PrincipalDetail;
 
@@ -23,11 +25,15 @@ public class UserController {
 		System.out.println("check point(GetMapping) ::: /auth/loginForm");
 		return "user/loginForm";
 	}
-		
+
+	@GetMapping("/auth/kakao/callback")
+	public @ResponseBody String kakaoCallback(String code) { // Data를 리턴해주는 컨트롤러 함수
+		return "カカオ引証コード値 :::" + code;
+	}
+
 	@GetMapping("/user/updateForm")
 	public String updateForm(@AuthenticationPrincipal PrincipalDetail principal) {
 		return "user/updateForm";
 	}
-	 
-	
+
 }

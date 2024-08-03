@@ -56,6 +56,7 @@ public class SecurityConfig {
 						.defaultSuccessUrl("/") // 추가한 부분
 //                    .failureUrl("/fail")
 						.permitAll());
+		
 		return http.build();
 	}
 }
